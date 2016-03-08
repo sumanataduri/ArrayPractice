@@ -1,11 +1,30 @@
+/*{
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": true,
+    "newcap": true,
+    "nonew": true,
+    "quotmark": "double",
+    "undef": true,
+    "unused": true,
+    "strict": true,
+    "trailing": true,
+    "node": true,
+    "predef":["_"]
+}*/
+/*globals $:false, _:false */
 var main = function() {
     "use strict";
     var i, j = 0;
 
     $(".average button").on("click", function() {
         var input = $(".average input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
+
             if (validate(input)) {
                 $(".avg").text(exercise1(input));
             } else {
@@ -17,8 +36,8 @@ var main = function() {
     });
     $(".highest button:nth-child(3)").on("click", function() {
         var input = $(".highest input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
             if (validate(input)) {
                 $(".max").text(exercise2(input));
             } else {
@@ -30,8 +49,8 @@ var main = function() {
     });
     $(".highest button:nth-child(4)").on("click", function() {
         var input = $(".highest input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
             if (validate(input)) {
                 $(".max").text(exercise2_(input));
             } else {
@@ -43,8 +62,8 @@ var main = function() {
     });
     $(".oneeven button:nth-child(3)").on("click", function() {
         var input = $(".oneeven input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
             if (validate(input)) {
                 $(".one").text(exercise3(input));
             } else {
@@ -56,8 +75,8 @@ var main = function() {
     });
     $(".oneeven button:nth-child(4)").on("click", function() {
         var input = $(".oneeven input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
             if (validate(input)) {
                 $(".one").text(exercise3_(input));
             } else {
@@ -69,8 +88,8 @@ var main = function() {
     });
     $(".alleven button:nth-child(3)").on("click", function() {
         var input = $(".alleven input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
             if (validate(input)) {
 
                 $(".even").text(exercise4(input));
@@ -83,8 +102,8 @@ var main = function() {
     });
     $(".alleven button:nth-child(4)").on("click", function() {
         var input = $(".alleven input").val();
-        input = input.split(" ");
         if (input !== "") {
+            input = input.split(" ");
             if (validate(input)) {
                 $(".even").text(exercise4_(input));
             } else {
@@ -146,7 +165,11 @@ var main = function() {
     function exercise1(nums) {
         var sumSoFar = 0;
         for (i = 0; i < nums.length; i++) {
-            sumSoFar = parseInt(sumSoFar) + parseInt(nums[i]);
+            if (nums[i] !== "") {
+                sumSoFar = parseInt(sumSoFar) + parseInt(nums[i]);
+            } else {
+                return "Enter numbers with single space as seperator";
+            }
         }
         sumSoFar = sumSoFar / nums.length;
         return sumSoFar;
@@ -204,11 +227,17 @@ var main = function() {
     }
 
     function exercise4_(nums) {
-        var evens = _.filter(nums, function(num) {
+        var numbers = [];
+        for (i = 0; i < nums.length; i++) {
+            if (nums[i] !== "") {
+                numbers.push(nums[i]);
+            }
+        }
+        var evens = _.filter(numbers, function(num) {
             return parseInt(num) % 2 === 0;
         });
 
-        if (evens.length === nums.length) {
+        if (evens.length === numbers.length) {
             return "True";
         }
         return "False";
